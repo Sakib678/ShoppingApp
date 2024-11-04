@@ -22,6 +22,6 @@ class AppServiceProvider extends ServiceProvider
        // If using Che then uncomment to force https
        // otherwise files like css on server will not load
        
-       //   \URL::forceScheme('https');
+          \URL::forceScheme('https');
     }
 }
