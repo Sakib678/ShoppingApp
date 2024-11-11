@@ -1,3 +1,3 @@
 <x-background-layout>
-    <x-product-card />
+        <x-product-card :product="$product" />      
 </x-background-layout>
