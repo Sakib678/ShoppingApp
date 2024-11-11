@@ -8,6 +8,7 @@ use App\Models\Product;
 
 class ProductController extends Controller
 {
+    
     /**
      * Display a listing of the resource.
      */
@@ -36,11 +37,11 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(int $id)
+    public function show(int $id, Request $request)
     {
-        $product = Product::find($id);
-        return $product;
+          return view('product',['product'=>$request->all()]);
     }
+    
 
     /**
      * Show the form for editing the specified resource.
