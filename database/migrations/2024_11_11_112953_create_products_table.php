@@ -12,16 +12,16 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('products', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+                $table->id();
+                $table->timestamps();
+                $table->string('name');
+                $table->string('title');
+                $table->integer('price');
         });
     }
-
-    /**
-     * Reverse the migrations.
-     */
+    
     public function down(): void
     {
-        Schema::dropIfExists('products');
-    }
+         Schema::dropIfExists('products');
+     }
 };
