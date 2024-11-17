@@ -1,3 +1,5 @@
 <div>
-    <p>This is product card blade</p>
+   <p>{{$product->name}}</p>
+   <p>{{$product->title}}</p>
+   <p>{{$product->price}}</p>
 </div>
