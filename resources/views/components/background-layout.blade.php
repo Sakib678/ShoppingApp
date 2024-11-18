@@ -48,6 +48,7 @@
  
         <section>
             <p>MAIN CONTENT</p>
+            {{$slot}}
         </section>
         <footer>
             <p>Laravel v{{ Illuminate\Foundation\Application::VERSION }} (PHP v{{ PHP_VERSION }})</p>
