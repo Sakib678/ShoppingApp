@@ -12,6 +12,16 @@
 
       <p class="ml-auto text-base font-medium text-green-500">20% off</p>
   </div>
+  <div>
+   <div class="rounded-sm bg-yellow-300 hover:bg-blue-700 p-2 m-2 w-24">  
+    <a href="/product/{{$product->id}}" class="text-gray-700">Select</a>
+   </div>
+   <button value="" 
+      class="bg-yellow-300 hover:bg-blue-700 text-gray-700 p-2 m-2 w-24 rounded-sm select-product">
+      SelectJS
+   </button>
 </div>
+</div>
+
 
 </div>
