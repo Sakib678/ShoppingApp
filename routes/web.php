@@ -8,8 +8,8 @@ use Illuminate\Support\Facades\Route;
 /*Route::get('/', function () {
     return view('welcome');
 });*/
-Route::get('/product/create', [ProductController::class, 'create']);
-Route::get('/product/{id}/edit', [ProductController::class, 'edit']);
+Route::get('/product/create', [ProductController::class, 'create'])->name('product.create');
+Route::get('/product/{id}/edit', [ProductController::class, 'edit'])->name('product.edit');
 Route::get('/', [ProductController::class, 'index'])->name('home');
 Route::get('/product/{id}', [ProductController::class, 'show']);
 

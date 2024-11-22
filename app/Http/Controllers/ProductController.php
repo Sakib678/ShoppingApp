@@ -51,7 +51,8 @@ class ProductController extends Controller
      */
     public function edit(int $id)
     {
-        return "SHOW THE PRODUCT FORM FOR PRODUCT ".$id;
+        $product = Product::find($id);
+        return view('productform',['product'=>$product]);
     }
 
     /**
