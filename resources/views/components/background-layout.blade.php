@@ -2,6 +2,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
      <title>Laravel</title>
+     <script src="{{ asset('js/my.js') }}" ></script>
      @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body>
