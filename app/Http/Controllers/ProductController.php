@@ -24,7 +24,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        return view("productform");
     }
 
     /**
@@ -49,9 +49,9 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Product $product)
+    public function edit(int $id)
     {
-        //
+        return "SHOW THE PRODUCT FORM FOR PRODUCT ".$id;
     }
 
     /**
