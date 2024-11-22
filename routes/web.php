@@ -8,10 +8,11 @@ use Illuminate\Support\Facades\Route;
 /*Route::get('/', function () {
     return view('welcome');
 });*/
-Route::get('/', [ProductController::class, 'index'])->name('home');
-Route::get('/product/{id}', [ProductController::class, 'show']);
 Route::get('/product/create', [ProductController::class, 'create']);
 Route::get('/product/{id}/edit', [ProductController::class, 'edit']);
+Route::get('/', [ProductController::class, 'index'])->name('home');
+Route::get('/product/{id}', [ProductController::class, 'show']);
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
