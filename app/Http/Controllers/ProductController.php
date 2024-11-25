@@ -59,7 +59,7 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateProductRequest $request, int $id)
+    public function update(Request $request, int $id)
     {
     return "PUT request received and processed successfully";
     }

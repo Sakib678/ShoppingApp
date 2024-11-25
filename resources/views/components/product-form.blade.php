@@ -9,7 +9,12 @@
     @endif
     
 <div>
-<form method="POST" action="/product">  
+@if(Route::is('product.create') )
+        <form method="POST" action="{{route('product.store')}}" >
+@elseif(Route::is('product.edit') ) 
+        <form method="POST" action="{{route('product.update', ['id'=>$product->id])}}" >
+        <input type="hidden" name="_method" value="PUT">
+@endif 
     @csrf
 
     <div class="p-2 m-2 rounded-lg border-2 border-blue-900 max-w-md">
@@ -25,11 +30,9 @@
         <div>
         @if(Route::is('product.create') )
         <button type="submit" class="bg-gray-800 text-white mt-2 p-2">Add New</button>
-        <form method="POST" action="{{route('product.store')}}" 
         @elseif(Route::is('product.edit') )
-            <button type="submit" value="{{$product->id}}" class="bg-gray-800 text-white mt-2 p-2">Update</button>
-            <form method="POST" action="{{route('product.update', ['id'=>$product->id])}}" >
-            <input type="hidden" name="_method" value="PUT">
+        <button type="submit" class="bg-gray-800 text-white mt-2 p-2">Update</button>
+           
         @endif
         </div>
     </div>
