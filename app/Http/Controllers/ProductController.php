@@ -32,7 +32,7 @@ class ProductController extends Controller
      */
     public function store(StoreProductRequest $request)
     {
-        //
+        return "POST request received and processed successfully";
     }
 
     /**
@@ -58,9 +58,9 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateProductRequest $request, Product $product)
+    public function update(UpdateProductRequest $request, int $id)
     {
-        //
+    return "PUT request received and processed successfully";
     }
 
     /**
