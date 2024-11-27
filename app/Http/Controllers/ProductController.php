@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Redirect;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use App\Models\Product;
@@ -33,7 +34,9 @@ class ProductController extends Controller
      */
     public function store(StoreProductRequest $request)
     {
-        return "POST request received and processed successfully";
+        Product::create($request->except('_token'));
+
+        return Redirect::route('home');
     }
 
     /**
@@ -62,6 +65,7 @@ class ProductController extends Controller
     public function update(Request $request, int $id)
     {
     return "PUT request received and processed successfully";
+    return Redirect::route('index');
     }
 
     /**
