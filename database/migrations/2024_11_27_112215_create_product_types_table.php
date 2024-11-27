@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('product_types', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-        });
+            $table->char('type', 25)->unique();
+     });
     }
 
     /**
