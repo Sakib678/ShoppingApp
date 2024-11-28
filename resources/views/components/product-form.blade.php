@@ -24,6 +24,9 @@
         <p class="text-sm">
             <input name="name" type="text" placeholder="artist/author/console" value="{{$product->name ?? ''}}" />
         </p>
+        <p class="text-sm">
+            <input name="producttype" type="text" placeholder="Product Type" value="{{$product->producttype ?? ''}}" />
+        </p>
         <p>
             <input type="number" step='0.01' name="price" placeholder="price" value="{{$product->price ?? 0 / 100 }}" />
         </p>   
