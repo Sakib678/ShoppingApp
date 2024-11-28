@@ -6,10 +6,10 @@
   <div class="p-4">
     <h2 class="mb-2 text-lg font-medium dark:text-white text-gray-900">{{$product->name}}</h2>
     <p class="mb-2 text-base dark:text-gray-300 text-gray-700">{{$product->title}}</p>
+    <p>Type: {{ $product->productType->type ?? 'N/A' }}</p>    
     <div class="flex items-center">
       <p class="mr-2 text-lg font-semibold text-gray-900 dark:text-white">£{{$product->price}}</p>
     </div>
-
       <p class="ml-auto text-base font-medium text-green-500">20% off</p>
   </div>
   <div>
