@@ -17,6 +17,9 @@ Route::get('/product/{id}', [ProductController::class, 'show']);
 Route::post('/product', [ProductController::class, 'store'])->name('product.store');
 Route::put('/product/{id}', [ProductController::class, 'update'])->name('product.update');
 
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
