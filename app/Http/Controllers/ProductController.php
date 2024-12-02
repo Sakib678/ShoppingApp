@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Gate;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use App\Models\Product;
@@ -55,6 +56,7 @@ class ProductController extends Controller
      */
     public function edit(int $id)
     {
+        Gate::authorize('can-edit-product');
         $product = Product::find($id);
         return view('productform',['product'=>$product]);
     }
