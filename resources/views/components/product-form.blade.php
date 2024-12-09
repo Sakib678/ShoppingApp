@@ -14,6 +14,8 @@
 @elseif(Route::is('product.edit') ) 
         <form method="POST" action="{{route('product.update', ['id'=>$product->id])}}" >
         <input type="hidden" name="_method" value="PUT">
+@elseif(Route::is('product.destroy'))
+        <form method="POST" action="{{route('product.destroy', ['id'=>$product->id])}}" >
 @endif 
     @csrf
 

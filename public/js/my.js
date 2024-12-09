@@ -6,6 +6,9 @@ window.onload = function() {
     else if(e.target.matches('button.edit-product')){
         editProductByID(e.target.value)
     }
+    else if(e.target.matches('button.delete-product')){
+        deleteProductByID(e.target.value)
+    }
     });
 }
 
