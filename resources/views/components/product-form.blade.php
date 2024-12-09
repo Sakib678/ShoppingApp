@@ -32,7 +32,10 @@
         </p>   
         <div>
         @if(Route::is('product.create') )
-        <button type="submit" class="bg-gray-800 text-white mt-2 p-2">Add New</button>
+        @can('create', App\Models\Product::class)
+            <button type="submit" class="bg-gray-800 text-white mt-2 p-2">Add New</button>
+         @endcan
+        
         @elseif(Route::is('product.edit') )
         <button type="submit" class="bg-gray-800 text-white mt-2 p-2">Update</button>
            

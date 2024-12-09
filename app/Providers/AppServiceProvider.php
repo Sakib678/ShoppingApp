@@ -24,6 +24,7 @@ class AppServiceProvider extends ServiceProvider
         
         Gate::define('can-edit-product', function (User $user) {
             return ($user->is_admin == 1); //expression equates to true/false
+            
         
         });
         // If using Che then uncomment to force https
