@@ -31,10 +31,10 @@
 
     <div class="p-2 m-2 rounded-lg border-2 border-blue-900 max-w-md">
         <div class="text-sm">
-            <input name="title" type="text" placeholder="Title" value="{{$product->title ?? ''}}" required/>
+            <input name="title" type="text" placeholder="Title" value="{{$product->title ?? ''}}" required />
         </div>
         <p class="text-sm">
-            <input name="name" type="text" placeholder="Artist/Author/Console" value="{{$product->name ?? ''}}" required />
+            <input name="name" type="text" placeholder="Artist/Author/Console" value="{{$product->name ?? ''}}"  required/>
         </p>
         <p class="text-sm">
             <label for="product_type_id" class="block text-gray-700">Product Type:</label>

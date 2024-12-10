@@ -15,7 +15,7 @@ class ProductTypeSeeder extends Seeder
     {
         $producttypes = [
             'Book',
-            'CD',
+            'Music',
             'Game',
         ];
 

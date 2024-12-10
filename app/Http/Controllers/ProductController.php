@@ -65,10 +65,12 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Product $product)
+    public function update(Request $request, Product $product, $id)
     {
          
         Gate::authorize('edit-product'); 
+        $product = Product::find($id);
+
 
         $product->update([
             'title' => $request->input('title'),
@@ -77,6 +79,9 @@ class ProductController extends Controller
             'price' => $request->input('price'),
         ]);
 
+        $product->save();
+
+        // Redirect to the product index page or the specific product page
         return redirect()->route('home');
     }
 

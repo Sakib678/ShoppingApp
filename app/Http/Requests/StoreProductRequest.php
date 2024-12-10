@@ -24,8 +24,8 @@ class StoreProductRequest extends FormRequest
     return [
         'title' => 'required|max:255',
         'name' => 'required|max:255',
-        'price' => 'required|numeric',
-        'producttype' => 'required|max:255',
+        'price' => 'required|numeric|min:0|max:1000',
+        'product_type_id' => 'required|integer',
         ];
     }
 }
