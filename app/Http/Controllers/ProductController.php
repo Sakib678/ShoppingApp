@@ -27,7 +27,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-    
+        Gate::authorize('create-product');
         return view("productform");
     }
 
@@ -57,7 +57,7 @@ class ProductController extends Controller
      */
     public function edit(int $id)
     {
-        Gate::authorize('can-edit-product');
+        Gate::authorize('edit-product');
         $product = Product::find($id);
         return view('productform',['product'=>$product]);
     }
@@ -65,10 +65,19 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateProductRequest $request, int $id)
+    public function update(Request $request, Product $product)
     {
-    return "PUT request received and processed successfully";
-    return Redirect::route('index');
+         
+        Gate::authorize('edit-product'); 
+
+        $product->update([
+            'title' => $request->input('title'),
+            'name' => $request->input('name'),
+            'product_type_id' => $request->input('product_type_id'),
+            'price' => $request->input('price'),
+        ]);
+
+        return redirect()->route('home');
     }
 
     /**
@@ -76,6 +85,7 @@ class ProductController extends Controller
      */
     public function destroy(int $id)
     {
+        Gate::authorize('delete-product');
         $product = Product::find($id);
         $product->delete();
         return Redirect::route('home');

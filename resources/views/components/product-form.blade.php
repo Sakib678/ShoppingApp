@@ -6,41 +6,54 @@
         @endforeach
         </ul>
     </div>
-    @endif
+@endif
     
 <div>
-@if(Route::is('product.create') )
-        <form method="POST" action="{{route('product.store')}}" >
-@elseif(Route::is('product.edit') ) 
-        <form method="POST" action="{{route('product.update', ['id'=>$product->id])}}" >
-        <input type="hidden" name="_method" value="PUT">
+
+@if(Route::is('product.edit') )
+    @can('edit-product')
+    <form method="POST" action="{{ route('product.update', ['id' => $product->id]) }}">
+        @method('PUT')
+        @csrf
+    @endcan    
+@elseif(Route::is('product.create'))
+    @can('create-product')
+    <form method="POST" action="{{ route('product.store') }}">
+        @csrf
+    @endcan    
 @elseif(Route::is('product.destroy'))
-        <form method="POST" action="{{route('product.destroy', ['id'=>$product->id])}}" >
-@endif 
-    @csrf
+    @can('delete-product')
+    <form method="POST" action="{{ route('product.destroy', ['id' => $product->id]) }}">
+        @method('DELETE')
+        @csrf
+    @endcan    
+@endif
 
     <div class="p-2 m-2 rounded-lg border-2 border-blue-900 max-w-md">
         <div class="text-sm">
-            <input name="title" type="text" placeholder="title" value="{{$product->title ?? ''}}" />
+            <input name="title" type="text" placeholder="Title" value="{{$product->title ?? ''}}" required/>
         </div>
         <p class="text-sm">
-            <input name="name" type="text" placeholder="artist/author/console" value="{{$product->name ?? ''}}" />
+            <input name="name" type="text" placeholder="Artist/Author/Console" value="{{$product->name ?? ''}}" required />
         </p>
         <p class="text-sm">
-            <input name="producttype" type="text" placeholder="Product Type" value="{{$product->producttype ?? ''}}" />
+            <label for="product_type_id" class="block text-gray-700">Product Type:</label>
+                <select name="product_type_id" id="product_type_id" class="w-full border-2 p-2 rounded" required>
+                    <option value="1" {{ isset($product) && $product->product_type_id == 1 ? 'selected' : '' }}>Book</option>
+                    <option value="2" {{ isset($product) && $product->product_type_id == 2 ? 'selected' : '' }}>Music</option>
+                    <option value="3" {{ isset($product) && $product->product_type_id == 3 ? 'selected' : '' }}>Game</option>
+                </select>
         </p>
         <p>
             <input type="number" step='0.01' name="price" placeholder="price" value="{{$product->price ?? 0 / 100 }}" />
         </p>   
         <div>
-        @if(Route::is('product.create') )
-        @can('create', App\Models\Product::class)
-            <button type="submit" class="bg-gray-800 text-white mt-2 p-2">Add New</button>
-         @endcan
-        
-        @elseif(Route::is('product.edit') )
-        <button type="submit" class="bg-gray-800 text-white mt-2 p-2">Update</button>
-           
+        @if(Route::is('product.create'))
+            <button type="submit" class="bg-blue-500 text-white mt-2 p-2 rounded">Create Product</button>
+        @elseif(Route::is('product.edit'))
+            <button type="submit" class="bg-gray-800 text-white mt-2 p-2 rounded">Update</button>
+        @elseif(Route::is('product.destroy'))
+            <button type="submit" class="bg-red-600 text-white mt-2 p-2 rounded">Delete</button>
         @endif
         </div>
     </div>

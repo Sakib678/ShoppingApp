@@ -14,14 +14,18 @@
         </div>
         <div>
         <div>  
-                @can('can-edit-product')
-                <button value="{{$product->id}}" class="bg-yellow-300 hover:bg-blue-700 text-gray-700 p-2 m-2 w-24 rounded-sm edit-product">Edit</button>
-                
-                <form action="{{ route('product.destroy', $product->id) }}" method="POST">
-                @csrf
-                @method('DELETE')
-                <button type ="submit" class="bg-yellow-300 hover:bg-blue-700 text-gray-700 p-2 m-2 w-24 rounded-sm">Delete</button>
-                </form>
+                @can('edit-product')
+                    <form action="{{ route('product.edit', $product->id) }}" method="get">
+                        @csrf
+                        <button type="submit" value="{{$product->id}}" class="bg-yellow-300 hover:bg-blue-700 text-gray-700 p-2 m-2 w-24 rounded-sm edit-product">Edit</button>
+                    </form>
+                @endcan
+                @can('delete-product')
+                    <form action="{{ route('product.destroy', $product->id) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type ="submit" class="bg-yellow-300 hover:bg-blue-700 text-gray-700 p-2 m-2 w-24 rounded-sm">Delete</button>
+                    </form>
                 @endcan
         </div>
         <button value="{{$product->id}}" 
