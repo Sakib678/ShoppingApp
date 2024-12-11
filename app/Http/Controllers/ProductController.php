@@ -12,15 +12,37 @@ use Illuminate\Http\Request;
 class ProductController extends Controller
 {
     
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function index(Request $request)
     {
-    $products = Product::with('productType')->get();
-    //dd($products);
-    return view('product',['products'=>$products]);
+        $query = Product::with('productType');
+
+        if ($request->has('filter')) {
+            switch ($request->input('filter')) {
+                case 'book':
+                    $query->where('product_type_id', 1);
+                    break;
+                case 'music':
+                    $query->where('product_type_id', 2);
+                    break;
+                case 'game':
+                    $query->where('product_type_id', 3);
+                    break;
+                case 'price_asc':
+                    $query->orderBy('price', 'asc');
+                    break;
+                case 'price_desc':
+                    $query->orderBy('price', 'desc');
+                    break;
+            }
     }
+
+    // Retrieve the filtered products
+    $products = $query->get();
+
+    // Return the view with the products
+    return view('product', ['products' => $products]);
+}
+
 
     /**
      * Show the form for creating a new resource.
