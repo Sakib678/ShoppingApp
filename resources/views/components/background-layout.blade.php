@@ -21,7 +21,6 @@
                     </button>
              </x-slot>
             <x-slot name="content">
-                <!-- Authentication -->
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
                     <x-dropdown-link :href="route('logout')" onclick="event.preventDefault(); this.closest('form').submit();">
@@ -57,7 +56,7 @@
             {{$slot}}
         </section>
         <footer>
-            <p>Laravel v{{ Illuminate\Foundation\Application::VERSION }} (PHP v{{ PHP_VERSION }})</p>
+            <p>Made by Sakib Arif c3606024 Laravel v{{ Illuminate\Foundation\Application::VERSION }} (PHP v{{ PHP_VERSION }})</p>
         </footer>
     </body>
 </html>
