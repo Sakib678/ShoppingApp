@@ -36,10 +36,9 @@ class ProductController extends Controller
             }
     }
 
-    // Retrieve the filtered products
-    $products = $query->get();
+    $products = $query->paginate(10);
 
-    // Return the view with the products
+
     return view('product', ['products' => $products]);
 }
 

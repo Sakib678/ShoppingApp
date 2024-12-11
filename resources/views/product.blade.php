@@ -21,4 +21,8 @@
     @endforelse
     </div>
     </div> 
+
+    <div class="mt-4">
+        {{ $products->appends(request()->query())->links() }}
+    </div>
 </x-background-layout>
