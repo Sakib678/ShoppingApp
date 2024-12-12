@@ -37,7 +37,6 @@
             <input name="name" type="text" placeholder="Artist/Author/Console" value="{{$product->name ?? ''}}"  required/>
         </p>
         <p class="text-sm">
-            <label for="product_type_id" class="block text-gray-700">Product Type:</label>
                 <select name="product_type_id" id="product_type_id" class="w-full border-2 p-2 rounded" required>
                     <option value="1" {{ isset($product) && $product->product_type_id == 1 ? 'selected' : '' }}>Book</option>
                     <option value="2" {{ isset($product) && $product->product_type_id == 2 ? 'selected' : '' }}>Music</option>

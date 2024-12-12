@@ -9,7 +9,6 @@
     @include('components.menu-bar') 
 
     <section>
-        <p>MAIN CONTENT</p>
         {{ $slot }}
     </section>
     <footer>
