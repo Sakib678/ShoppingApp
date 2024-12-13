@@ -8,7 +8,12 @@
                 @endif
             @endauth
         </div>
-
+        <div>
+            <form action="{{ route('product.search') }}" method="GET">
+                <input type="text" name="search" placeholder="Search Products">
+                <button type="submit">Search</button>
+            </form>
+        </div>
             @auth
                 <div class="sm:flex sm:items-center sm:ml-6 mx-48 px-48">
                     <x-dropdown class="mx-48" align="right" width="48">

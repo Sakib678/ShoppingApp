@@ -18,6 +18,7 @@ Route::get('/product/{id}', [ProductController::class, 'show']);
 Route::post('/product', [ProductController::class, 'store'])->name('product.store');
 Route::put('/product/{id}', [ProductController::class, 'update'])->name('product.update');
 Route::delete('/product/{id}',[ProductController::class,'destroy'])->middleware('can:delete-product,product')->name('product.destroy');
+Route::get('/product/search', [ProductController::class, 'search'])->name('product.search');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

@@ -21,6 +21,7 @@ class ProductController extends Controller
                 case 'book':
                     $query->where('product_type_id', 1);
                     break;
+                    
                 case 'music':
                     $query->where('product_type_id', 2);
                     break;
@@ -116,5 +117,15 @@ class ProductController extends Controller
         $product->delete();
         return Redirect::route('home');
         }
+    public function search(Request $request)
+        {
+            $search = $request->input('search');
+            $results = Product::where('name', 'like', "%$search%")
+                                ->orWhere('title', 'like', "%$search%")
+                                ->paginate(10);
+            
+            return view('product.search', ['results' => $results]);
+            }     
+        
     }
 
