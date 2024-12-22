@@ -8,12 +8,7 @@
                 @endif
             @endauth
         </div>
-        <div>
-            <form action="{{ route('product.search') }}" method="GET">
-                <input type="text" name="search" placeholder="Search Products">
-                <button type="submit">Search</button>
-            </form>
-        </div>
+        
             @auth
                 <div class="sm:flex sm:items-center sm:ml-6 mx-48 px-48">
                     <x-dropdown class="mx-48" align="right" width="48">
@@ -45,9 +40,9 @@
                     @endif
                 </div>
             @else
-                <a href="{{ route('login') }}" class="text-sm text-gray-700 underline">Login</a>
+                <a href="{{ route('login') }}" class="text-sm text-white-700 ">Login</a>
                 @if (Route::has('register'))
-                    <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 underline">Register</a>
+                    <a href="{{ route('register') }}" class="ml-4 text-sm text-white-700 ">Register</a>
                 @endif
             @endauth
         </div>

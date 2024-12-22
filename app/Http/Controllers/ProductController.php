@@ -13,37 +13,41 @@ class ProductController extends Controller
 {
     
     public function index(Request $request)
-    {
-        $query = Product::with('productType');
+{
+    $query = Product::query();
 
-        if ($request->has('filter')) {
-            switch ($request->input('filter')) {
-                case 'book':
-                    $query->where('product_type_id', 1);
-                    break;
-                    
-                case 'music':
-                    $query->where('product_type_id', 2);
-                    break;
-                case 'game':
-                    $query->where('product_type_id', 3);
-                    break;
-                case 'price_asc':
-                    $query->orderBy('price', 'asc');
-                    break;
-                case 'price_desc':
-                    $query->orderBy('price', 'desc');
-                    break;
-            }
+    if ($request->has('search') && !empty($request->input('search'))) {
+        $query->where('name', 'like', '%' . $request->input('search') . '%')
+              ->orWhere('title', 'like', '%' . $request->input('search') . '%');
+    }
+
+    if ($request->has('filter')) {
+        switch ($request->input('filter')) {
+            case 'book':
+                $query->where('product_type_id', 1);
+                break;
+            case 'music':
+                $query->where('product_type_id', 2);
+                break;
+            case 'game':
+                $query->where('product_type_id', 3);
+                break;
+            case 'price_asc':
+                $query->orderBy('price', 'asc');
+                break;
+            case 'price_desc':
+                $query->orderBy('price', 'desc');
+                break;
+        }
     }
 
     $products = $query->paginate(10);
 
-
     return view('product', ['products' => $products]);
 }
+    
 
-
+         
     /**
      * Show the form for creating a new resource.
      */
@@ -117,15 +121,7 @@ class ProductController extends Controller
         $product->delete();
         return Redirect::route('home');
         }
-    public function search(Request $request)
-        {
-            $search = $request->input('search');
-            $results = Product::where('name', 'like', "%$search%")
-                                ->orWhere('title', 'like', "%$search%")
-                                ->paginate(10);
-            
-            return view('product.search', ['results' => $results]);
-            }     
+    
         
     }
 
