@@ -62,7 +62,13 @@ class ProductController extends Controller
      */
     public function store(StoreProductRequest $request)
     {
-        Product::create($request->except('_token'));
+        $data = $request->except('_token');
+
+        if ($request->hasFile('image')) {
+            $data['image'] = $request->file('image')->store('product_images', 'public');
+        }
+    
+        Product::create($data);
 
         return Redirect::route('home');
     }
