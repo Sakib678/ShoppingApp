@@ -107,7 +107,6 @@ class ProductController extends Controller
 
         $product->save();
 
-        // Redirect to the product index page or the specific product page
         return redirect()->route('home');
     }
 
