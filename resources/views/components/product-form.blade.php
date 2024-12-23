@@ -12,13 +12,13 @@
 
 @if(Route::is('product.edit') )
     @can('edit-product')
-    <form method="POST" action="{{ route('product.update', ['id' => $product->id]) }}">
+    <form method="POST" action="{{ route('product.update', ['id' => $product->id]) }}" enctype="multipart/form-data">
         @method('PUT')
         @csrf
     @endcan    
 @elseif(Route::is('product.create'))
     @can('create-product')
-    <form method="POST" action="{{ route('product.store') }}">
+    <form method="POST" action="{{ route('product.store') }}" enctype="multipart/form-data">
         @csrf
     @endcan    
 @elseif(Route::is('product.destroy'))
@@ -46,6 +46,10 @@
         <p>
             <input type="number" step='0.01' name="price" placeholder="price" value="{{$product->price ?? 0 / 100 }}" />
         </p>   
+        <p class="text-sm">
+            <label for="image">Product Image:</label>
+            <input type="file" name="image" id="image">
+        </p>
         <div>
         @if(Route::is('product.create'))
             <button type="submit" class="bg-blue-500 text-white mt-2 p-2 rounded">Create Product</button>
