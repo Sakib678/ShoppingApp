@@ -8,6 +8,7 @@ use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -104,15 +105,17 @@ class ProductController extends Controller
         $product = Product::find($id);
 
 
-        $product->update([
-            'title' => $request->input('title'),
-            'name' => $request->input('name'),
-            'product_type_id' => $request->input('product_type_id'),
-            'price' => $request->input('price'),
-        ]);
+        $data = $request->only(['title', 'name', 'product_type_id', 'price']);
 
-        $product->save();
+    if ($request->hasFile('image')) {
+        if ($product->image) {
+            Storage::disk('public')->delete($product->image);
+        }
 
+        $data['image'] = $request->file('image')->store('product_images', 'public');
+    }
+
+    $product->update($data);
         return redirect()->route('home');
     }
 
