@@ -10,7 +10,6 @@
             </div>
             <p class="ml-auto text-base font-medium text-green-500">20% off</p>
         </div>
-        <div>
         <div>  
                 @can('edit-product')
                     <form action="{{ route('product.edit', $product->id) }}" method="get">
@@ -26,11 +25,9 @@
                     </form>
                 @endcan
         </div>
-        <button value="{{$product->id}}" 
-            class="bg-yellow-300 hover:bg-blue-700 text-gray-700 p-2 m-2 w-24 rounded-sm select-product">
-            Select
-            </button>
-        </div>
+            <div class="rounded-sm bg-yellow-300 hover:bg-blue-700 p-2 m-2 w-24">
+                <a href="{{ route('product.show', $product->id) }}" class="text-gray-700">Select</a>
+            </div>
     </div>
 
 

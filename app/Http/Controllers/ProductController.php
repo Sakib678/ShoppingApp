@@ -19,8 +19,10 @@ class ProductController extends Controller
     $query = Product::query();
 
     if ($request->has('search') && !empty($request->input('search'))) {
-        $query->where('name', 'like', '%' . $request->input('search') . '%')
+        $query->where(function ($q) use ($request) {
+            $q->where('name', 'like', '%' . $request->input('search') . '%')
               ->orWhere('title', 'like', '%' . $request->input('search') . '%');
+        });
     }
 
     if ($request->has('filter')) {
@@ -28,7 +30,7 @@ class ProductController extends Controller
             case 'book':
                 $query->where('product_type_id', 1);
                 break;
-            case 'music':    
+            case 'music':
                 $query->where('product_type_id', 2);
                 break;
             case 'game':
@@ -43,10 +45,11 @@ class ProductController extends Controller
         }
     }
 
-    $products = $query->paginate(10);
+    $products = $query->paginate(10); 
 
     return view('product', ['products' => $products]);
 }
+
     
 
          
@@ -55,8 +58,6 @@ class ProductController extends Controller
      */
     public function create()
     {
-        
-        Gate::authorize('create-product');
         return view("productform");
     }
 
@@ -65,7 +66,6 @@ class ProductController extends Controller
      */
     public function store(StoreProductRequest $request)
     {
-        Gate::authorize('create-product');
         
         $data = $request->except('_token');
 
@@ -91,7 +91,7 @@ class ProductController extends Controller
             1,
             ['path' => url()->current()] 
         );
-        $products = array($product); 
+
         return view('product',['products'=>$products]);
     }
     

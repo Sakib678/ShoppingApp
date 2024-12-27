@@ -24,10 +24,6 @@ class AppServiceProvider extends ServiceProvider
         Gate::define('edit-product', function (User $user) {
             return ($user->is_admin==1); 
         });
-
-        Gate::define('create-product', function (User $user) {
-            return ($user->is_admin==1); 
-        });
     
         Gate::define('delete-product', function (User $user) {
             return ($user->is_admin==1); 
