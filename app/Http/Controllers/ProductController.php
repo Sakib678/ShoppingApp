@@ -9,6 +9,7 @@ use App\Http\Requests\UpdateProductRequest;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class ProductController extends Controller
 {
@@ -27,7 +28,7 @@ class ProductController extends Controller
             case 'book':
                 $query->where('product_type_id', 1);
                 break;
-            case 'music':
+            case 'music':    
                 $query->where('product_type_id', 2);
                 break;
             case 'game':
@@ -54,6 +55,7 @@ class ProductController extends Controller
      */
     public function create()
     {
+        
         Gate::authorize('create-product');
         return view("productform");
     }
@@ -63,16 +65,19 @@ class ProductController extends Controller
      */
     public function store(StoreProductRequest $request)
     {
+        Gate::authorize('create-product');
+        
         $data = $request->except('_token');
 
         if ($request->hasFile('image')) {
             $data['image'] = $request->file('image')->store('product_images', 'public');
         }
-    
+
         Product::create($data);
 
         return Redirect::route('home');
     }
+
 
     /**
      * Display the specified resource.
@@ -80,6 +85,12 @@ class ProductController extends Controller
     public function show(int $id)
     {
         $product = Product::with('productType')->find($id);
+        $products = new LengthAwarePaginator(
+            [$product], 
+            1,
+            1,
+            ['path' => url()->current()] 
+        );
         $products = array($product); 
         return view('product',['products'=>$products]);
     }
