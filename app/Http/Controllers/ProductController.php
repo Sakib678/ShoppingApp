@@ -45,7 +45,7 @@ class ProductController extends Controller
         }
     }
 
-    $products = $query->paginate(10); 
+    $products = $query->paginate(8); 
 
     return view('product', ['products' => $products]);
 }
@@ -58,15 +58,16 @@ class ProductController extends Controller
      */
     public function create()
     {
+        Gate::authorize('create-product');
         return view("productform");
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreProductRequest $request)
+    public function store(Request $request)
     {
-        
+        Gate::authorize('create-product');
         $data = $request->except('_token');
 
         if ($request->hasFile('image')) {
